@@ -1255,9 +1255,10 @@
 	<BR><B>Back:</B> <A href='byond://?src=\ref[src];varname=back;slot=[src.slot_back];item=back'>[(src.back ? src.back : "Nothing")]</A> [((istype(src.wear_mask, /obj/item/clothing/mask) && istype(src.back, /obj/item/tank) && !( src.internal )) ? text(" <A href='byond://?src=\ref[];item=internal;slot=internal'>Set Internal</A>", src) : "")]
 	<BR><B>ID:</B> <A href='byond://?src=\ref[src];varname=wear_id;slot=[src.slot_wear_id];item=id'>[(src.wear_id ? src.wear_id : "Nothing")]</A>
 	<BR><B>Left Pocket:</B> <A href='byond://?src=\ref[src];varname=l_store;slot=[src.slot_l_store];item=pockets'>[(src.l_store ? "Something" : "Nothing")]</A>
-	<BR><B>Right Pocket:</B> <A href='byond://?src=\ref[src];varname=r_store;slot=[src.slot_r_store];item=pockets'>[(src.r_store ? "Something" : "Nothing")]</A>
+	<BR><B>Right Pocket:</B> <A href='byond://?src=\ref[src];varname=r_store;slot=[src.slot_r_store];item=pockets'>[(src.r_store ? "Something" : "Nonthing")]</A>
 	<BR>[(src.hasStatus("handcuffed") ? text("<A href='byond://?src=\ref[src];slot=handcuff;item=handcuff'>Handcuffed</A>") : text("<A href='byond://?src=\ref[src];item=handcuff;slot=handcuff'>Not Handcuffed</A>"))]
 	<BR>[(src.internal ? text("<A href='byond://?src=\ref[src];slot=internal;item=internal'>Remove Internal</A>") : "")]
+	<BR>[(src.shoes ? text("<A href='byond://?src=\ref[src];slot=tieLaces;item=tieLaces'>Tie shoelaces</A>") : "")]
 	<BR><A href='byond://?action=mach_close&window=mob[src.name]'>Close</A>
 	<BR>"}
 	user.Browse(dat, text("window=mob[src.name];size=340x480"))
@@ -1307,6 +1308,8 @@
 			actions.start(new/datum/action/bar/icon/handcuffRemovalOther(src), usr)
 		else if (href_list["slot"] == "internal")
 			actions.start(new/datum/action/bar/icon/internalsOther(src), usr)
+		else if (href_list["slot"] == "tieLaces")
+			actions.start(new/datum/action/bar/icon/TieLaces(src), usr)
 		else if (href_list["item"])
 			actions.start(new/datum/action/bar/icon/otherItem(usr, src, usr.equipped(), text2num(href_list["slot"]), 0, href_list["item"] == "pockets") , usr)
 

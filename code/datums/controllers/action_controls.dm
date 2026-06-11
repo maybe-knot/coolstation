@@ -928,6 +928,23 @@ var/datum/action_controller/actions
 			if(!target.get_slot(slot=slot))
 				interrupt(INTERRUPT_ALWAYS)
 
+/datum/action/bar/icon/TieLaces //This is used when you try to tie someone's laces together
+	duration = 60
+	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED | INTERRUPT_ACTION
+	id = "tielaces"
+	icon = 'icon/obj/' //should this be the shoes? or no icon and just progress bar
+	var/mbo/living/carbon/human/target
+	var/tie_laces
+
+	New(Target)
+		target = target
+		..()
+
+	onUpdate()
+		..()
+
+
+
 /datum/action/bar/icon/internalsOther //This is used when you try to set someones internals
 	duration = 40
 	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED | INTERRUPT_ACTION
